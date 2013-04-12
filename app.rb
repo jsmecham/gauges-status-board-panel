@@ -15,16 +15,22 @@ set :api_key, ""
 get "/traffic/:gauge_id" do |gauge_id|
 
   api_key = params[:api_key] || settings.api_key
-  api_response = nil
-  graph = {}
+  gauge   = nil
+  traffic = nil
+  graph   = {}
 
-  # Request traffic data from Gauges
+  # Request Gauge Detail from Gauges API
+  open("https://secure.gaug.es/gauges/#{gauge_id}", "X-Gauges-Token" => api_key) do |response|
+    gauge = MultiJson.load(response.read)["gauge"]
+  end
+
+  # Request Traffic from Gauges API
   open("https://secure.gaug.es/gauges/#{gauge_id}/traffic", "X-Gauges-Token" => api_key) do |response|
-    api_response = MultiJson.load(response.read)
+    traffic = MultiJson.load(response.read)["traffic"]
   end
 
   # Graph Title
-  graph[:title] = "Foo"
+  graph[:title] = gauge["title"]
 
   # Graph Type
   graph[:type] = "line"
@@ -37,7 +43,7 @@ get "/traffic/:gauge_id" do |gauge_id|
 
   # Views
   views = { :title => "Views", :datapoints => [] }
-  api_response["traffic"].each do |entry|
+  traffic.each do |entry|
     views[:datapoints] << {
       :title => entry["date"],
       :value => entry["views"]
@@ -47,7 +53,7 @@ get "/traffic/:gauge_id" do |gauge_id|
 
   # People
   people = { :title => "People", :datapoints => [] }
-  api_response["traffic"].each do |entry|
+  traffic.each do |entry|
     people[:datapoints] << {
       :title => entry["date"],
       :value => entry["people"]
