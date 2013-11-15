@@ -1,2 +1,4 @@
 .DS_Store
+.bundle
+.tm_properties
 *.sublime*
