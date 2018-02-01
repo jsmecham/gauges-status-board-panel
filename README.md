@@ -1,15 +1,19 @@
-# Gauges Widget for Status Board
+# Gauges Status Board Panel
 
-This Sinatra app can be used to pull in analytics from the excellent
-[Gauges](http://gaug.es) service from GitHub and display them on your
+![Screenshot](screenshot.jpg)
+
+This web application can be used to pull in analytics from the
+[Gauges](http://gaug.es) service and display them on your
 [Status Board](http://panic.com/statusboard).
 
 ## Configuration
 
-To configure your own instance of this widget, you should be familiar with
+To configure your own instance of this panel, you should be familiar with
 running Sinatra or Ruby on Rails instances. Of course, if you are not familiar
 with setting up and running a Sinatra web application, the easiest route is to
-use [Heroku](http://heroku.com). Please reference [this tutorial](https://devcenter.heroku.com/articles/git)
+use [Heroku](http://heroku.com).
+
+Please reference [this tutorial](https://devcenter.heroku.com/articles/git)
 for more information about deploying to Heroku.
 
 ### Defining Your API Key
@@ -25,15 +29,12 @@ like so:
 This step is optional, however, as you can always pass in your API key to the
 app with the api_key request parameter. For example:
 
-    https://gauges-status-board-widget.herokuapp.com/traffic/<your-gauge-id>?api_key=<your-api-key>
+    https://<your-deployment-location>/traffic/<your-gauge-id>?api_key=<your-api-key>
 
 ## Usage
 
-Currently, the only supported endpoint is the Traffic endpoint. More endpoints
-will be added soon.
-
-To use, simply add a Graph widget to your Status Board with a URL similar to
-the following:
+The only supported endpoint is the Traffic endpoint. To use, simply add a Graph
+panel to your Status Board with a URL similar to the following:
 
     https://<your-deployment-location>/traffic/<your-gauge-id>
 
@@ -41,24 +42,9 @@ If you have not specified your API key in `app.rb`, your URL should look like:
 
     https://<your-deployment-location>/traffic/<your-gauge-id>?api_key=<your-api-key>
 
-## Live Example
-
-The Gauges Widget is deployed on Heroku at
-[https://gauges-status-board-widget.herokuapp.com](https://gauges-status-board-widget.herokuapp.com).
-
-Feel free to use the widget at this location, however, please note that I
-cannot make any guarantees about the reliability or security of this
-deployment. If this is of concern to you, please host your own instance of
-this widget.
-
-To use this live example in your Status Board, use the following URL:
-
-    https://gauges-status-board-widget.herokuapp.com/traffic/<your-gauge-id>?api_key=<your-api-key>
-
-
 ## Author
 
-Written by Justin Mecham ([email](mailto:justin@mecham.me),
+Developed by Justin Mecham ([email](mailto:justin@mecham.me),
 [twitter](http://twitter.com/jsmecham)).
 
 ## License
