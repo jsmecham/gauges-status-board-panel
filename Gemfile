@@ -1,7 +1,7 @@
 
 source "http://rubygems.org"
 
-ruby "2.0.0"
+ruby "~> 2.4.3"
 
 gem "multi_json"
 gem "sinatra"
